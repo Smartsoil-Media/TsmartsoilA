@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import { Suspense } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -13,6 +13,14 @@ import Link from "next/link"
 import { Mail } from "lucide-react"
 
 export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SignUpPageInner />
+    </Suspense>
+  )
+}
+
+function SignUpPageInner() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const inviteToken = searchParams.get("invite_token")

@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { Suspense } from "react"
 import Link from "next/link"
 
 import { createClient } from "@/lib/supabase/client"
@@ -12,6 +13,14 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useState, useEffect } from "react"
 
 export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginPageInner />
+    </Suspense>
+  )
+}
+
+function LoginPageInner() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
